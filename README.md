@@ -135,7 +135,7 @@ GROUP BY Invoice.InvoiceId
 ```
 (18) Provide a query that shows total sales made by each sales agent.
 ```
-SELECT Employee.FirstName || " " || Employee.LastName AS "Sales Agent", SUM(Invoice.Total) AS "Total Sales"
+SELECT Employee.FirstName || " " || Employee.LastName AS "Sales Agent", SUM(Invoice.Total) AS "Total Sales $"
 FROM Employee
 JOIN Customer ON Employee.EmployeeId = Customer.SupportRepId
 JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
@@ -143,27 +143,67 @@ GROUP BY "Sales Agent"
 ```
 (19) Which sales agent made the most in sales in 2009?
 ```
-
+SELECT Employee.FirstName || " " || Employee.LastName AS "Sales Agent", SUM(Invoice.Total) AS "Total Sales $"
+FROM Employee
+JOIN Customer ON Employee.EmployeeId = Customer.SupportRepId
+JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
+WHERE Invoice.InvoiceDate LIKE '2009%'
+GROUP BY "Sales Agent" 
+ORDER BY "Total Sales $" DESC
+LIMIT 1
 ```
 (20) Which sales agent made the most in sales in 2010?
 ```
-
+SELECT Employee.FirstName || " " || Employee.LastName AS "Sales Agent", SUM(Invoice.Total) AS "Total Sales $"
+FROM Employee
+JOIN Customer ON Employee.EmployeeId = Customer.SupportRepId
+JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
+WHERE Invoice.InvoiceDate LIKE '2010%'
+GROUP BY "Sales Agent" 
+ORDER BY "Total Sales $" DESC
+LIMIT 1
 ```
 (21) Which sales agent made the most in sales over all?
 ```
-
+SELECT Employee.FirstName || " " || Employee.LastName AS "Sales Agent", SUM(Invoice.Total) AS "Total Sales $"
+FROM Employee
+JOIN Customer ON Employee.EmployeeId = Customer.SupportRepId
+JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
+GROUP BY "Sales Agent"
+ORDER BY "Total Sales $" DESC
+LIMIT 1
 ```
 (22) Provide a query that shows the # of customers assigned to each sales agent.
 ```
-
+SELECT Employee.FirstName || " " || Employee.LastName AS "Sales Agent", SUM(Customer.CustomerId) AS "Customer Total"
+FROM Employee
+JOIN Customer ON Employee.EmployeeId = Customer.SupportRepId
+GROUP BY "Sales Agent"
 ```
 (23) Provide a query that shows the total sales per country. Which country's customers spent the most?
 ```
+SELECT Invoice.BillingCountry, SUM(Invoice.Total) AS "Total Sales"
+FROM Invoice
+GROUP BY BillingCountry
 
+part 2 add;
+ORDER BY "Total Sales" DESC
+LIMIT 1
+
+ANS: USA $523.06
 ```
 (24) Provide a query that shows the most purchased track of 2013.
 ```
+SELECT Track.Name AS "Track", SUM(InvoiceLine.TrackId) AS "2013 downloads"
+FROM Track
+JOIN InvoiceLine ON Track.TrackId = InvoiceLine.TrackId
+JOIN Invoice ON InvoiceLine.InvoiceId = Invoice.InvoiceId
+WHERE Invoice.InvoiceDate LIKE "2013%"
+GROUP BY "Track"
+ORDER BY "2013 downloads" DESC
+LIMIT 1
 
+ANS: Eruption 6146
 ```
 (25) Provide a query that shows the top 5 most purchased tracks over all.
 ```
