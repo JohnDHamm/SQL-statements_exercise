@@ -231,7 +231,16 @@ LIMIT 5
 ```
 (26) Provide a query that shows the top 3 best selling artists.
 ```
+SELECT Artist.Name AS "Artist", SUM(InvoiceLine.TrackId) AS "Tracks bought"
+FROM Artist
+JOIN Album ON Artist.ArtistId = Album.ArtistId
+JOIN Track ON Album.AlbumId = Track.AlbumId
+JOIN InvoiceLine ON Track.TrackId = InvoiceLine.TrackId
+GROUP BY Artist.ArtistId
+ORDER BY "Tracks bought" DESC
+LIMIT 3
 
+ANS: U2 (324,057), Iron Maiden (185,226), Metallica (158,263)
 ```
 (27) Provide a query that shows the most purchased Media Type.
 ```
