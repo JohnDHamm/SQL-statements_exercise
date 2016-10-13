@@ -64,23 +64,31 @@ JOIN Invoice On Customer.CustomerId = Invoice.CustomerId;
 SELECT * 
 FROM Invoice
 WHERE InvoiceDate LIKE "2009%" OR InvoiceDate LIKE "2011%";
+
+ANS: 166
 ```
 ```
-SELECT SUM(Total) 
+SELECT SUM(Total) AS "2009 sales"
 FROM Invoice
 WHERE InvoiceDate LIKE "2009%";
+
+ANS: $449.46
 ```
 ```
-SELECT SUM(Total)
+SELECT SUM(Total) AS "2011 sales"
 FROM Invoice
 WHERE InvoiceDate LIKE "2011%";
+
+ANS: $469.58
 ```
 (10) Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.
 ```
-SELECT Count(InvoiceLineId)
+SELECT Count(InvoiceLineId)  AS "Invoice 37 Items"
 FROM InvoiceLine
 JOIN Invoice ON InvoiceLine.InvoiceId = Invoice.InvoiceId
 WHERE Invoice.InvoiceId = 37;
+
+ANS: 4
 ```
 (11) Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for each Invoice. HINT: [GROUP BY](http://www.sqlite.org/lang_select.html#resultset)
 ```
@@ -151,6 +159,8 @@ WHERE Invoice.InvoiceDate LIKE '2009%'
 GROUP BY "Sales Agent" 
 ORDER BY "Total Sales $" DESC
 LIMIT 1
+
+ANS: Steve Johnson $164.34
 ```
 (20) Which sales agent made the most in sales in 2010?
 ```
@@ -162,6 +172,8 @@ WHERE Invoice.InvoiceDate LIKE '2010%'
 GROUP BY "Sales Agent" 
 ORDER BY "Total Sales $" DESC
 LIMIT 1
+
+ANS: Jane Peacock $221.92
 ```
 (21) Which sales agent made the most in sales over all?
 ```
@@ -172,6 +184,8 @@ JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
 GROUP BY "Sales Agent"
 ORDER BY "Total Sales $" DESC
 LIMIT 1
+
+ANS: Jane Peacock $833.04
 ```
 (22) Provide a query that shows the # of customers assigned to each sales agent.
 ```
