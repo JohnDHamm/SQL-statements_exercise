@@ -228,6 +228,8 @@ JOIN InvoiceLine ON Track.TrackId = InvoiceLine.TrackId
 GROUP BY "Track"
 ORDER BY "Total Sales" DESC
 LIMIT 5
+
+ANS: Eruption (12292), Sweetest Thing (8977), Untitled (8898), Release (8151), String Quartet No. 12 in C Minor, D. 703 "Quartettsatz": II. Andante - Allegro assai (7000)
 ```
 (26) Provide a query that shows the top 3 best selling artists.
 ```
