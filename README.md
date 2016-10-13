@@ -221,7 +221,12 @@ ANS: Eruption 6146
 ```
 (25) Provide a query that shows the top 5 most purchased tracks over all.
 ```
-
+SELECT Track.Name AS "Track", SUM(InvoiceLine.TrackId) AS "Total Sales"
+FROM Track
+JOIN InvoiceLine ON Track.TrackId = InvoiceLine.TrackId
+GROUP BY "Track"
+ORDER BY "Total Sales" DESC
+LIMIT 5
 ```
 (26) Provide a query that shows the top 3 best selling artists.
 ```
