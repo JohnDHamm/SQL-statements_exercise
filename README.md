@@ -47,17 +47,18 @@ WHERE BillingCountry = "Brazil";
 ```
 (7) Provide a query that shows the invoices associated with each sales agent. The resultant table should include the Sales Agent's full name.
 ```
-SELECT Employee.FirstName || Employee.LastName As "Sales Agent", Invoice.* 
+SELECT Employee.FirstName || " " || Employee.LastName As "Sales Agent", Invoice.* 
 FROM Employee
 JOIN Customer On Employee.EmployeeId = Customer.SupportRepId
 JOIN Invoice On Customer.CustomerId = Invoice.CustomerId;
 ```
 (8) Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices and customers.
 ```
-SELECT Customer.FirstName ||" "|| Customer.LastName As "Customer", Customer.Country, Employee.FirstName || " " || Employee.LastName As "Sales Agent", Invoice.Total 
-FROM Employee
-JOIN Customer On Employee.EmployeeId = Customer.SupportRepId
-JOIN Invoice On Customer.CustomerId = Invoice.CustomerId;
+SELECT Customer.FirstName ||" "|| Customer.LastName AS "Customer", Customer.Country, Employee.FirstName || " " || Employee.LastName AS "Sales Agent", Sum(Invoice.Total) AS "Total"
+FROM Invoice
+JOIN Customer On Invoice.CustomerId = Customer.CustomerId
+JOIN Employee On Customer.SupportRepId = Employee.EmployeeId
+GROUP BY "Customer"
 ```
 (9) How many Invoices were there in 2009 and 2011? What are the respective total sales for each of those years?
 ```
