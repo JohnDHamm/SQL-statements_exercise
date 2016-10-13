@@ -120,15 +120,26 @@ GROUP BY "Playlist"
 ```
 (16) Provide a query that shows all the Tracks, but displays no IDs. The resultant table should include the Album name, Media type and Genre.
 ```
-
+SELECT Track.Name AS "Track", Album.Title AS "Album", MediaType.Name AS "Media Type", Genre.Name AS "Genre"
+FROM Track
+JOIN Album ON Track.AlbumId = Album.AlbumId
+JOIN MediaType ON Track.MediaTypeId = MediaType.MediaTypeId
+JOIN Genre ON Track.GenreId = Genre.GenreId
 ```
 (17) Provide a query that shows all Invoices but includes the # of invoice line items.
 ```
-
+SELECT Invoice.*, Count(InvoiceLineId) AS "Line Items"
+FROM Invoice
+JOIN InvoiceLine ON Invoice.InvoiceId = InvoiceLine.InvoiceId
+GROUP BY Invoice.InvoiceId
 ```
 (18) Provide a query that shows total sales made by each sales agent.
 ```
-
+SELECT Employee.FirstName || " " || Employee.LastName AS "Sales Agent", SUM(Invoice.Total) AS "Total Sales"
+FROM Employee
+JOIN Customer ON Employee.EmployeeId = Customer.SupportRepId
+JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
+GROUP BY "Sales Agent"
 ```
 (19) Which sales agent made the most in sales in 2009?
 ```
