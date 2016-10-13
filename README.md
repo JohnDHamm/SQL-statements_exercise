@@ -244,5 +244,13 @@ ANS: U2 (324,057), Iron Maiden (185,226), Metallica (158,263)
 ```
 (27) Provide a query that shows the most purchased Media Type.
 ```
+SELECT MediaType.Name AS "Media Type", SUM(InvoiceLine.TrackId) AS "Tracks bought"
+FROM MediaType
+JOIN Track ON MediaType.MediaTypeId = Track.MediaTypeId
+JOIN InvoiceLine ON Track.TrackId = InvoiceLine.TrackId
+GROUP BY Track.MediaTypeId
+ORDER BY "Tracks bought" DESC
+LIMIT 1
 
+ANS: MPEG audio file (3,093,401)
 ```
